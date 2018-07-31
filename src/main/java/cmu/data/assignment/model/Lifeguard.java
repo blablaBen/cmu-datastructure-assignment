@@ -25,4 +25,8 @@ public class Lifeguard {
         this.toTime = toTime;
     }
 
+    public int getRealEndTime() {
+        return this.toTime - 1;
+    }
+
 }
