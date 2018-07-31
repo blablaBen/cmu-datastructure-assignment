@@ -17,6 +17,7 @@ public class App
         File[] listOfFiles = folder.listFiles();
 
         for(File fileItem: listOfFiles) {
+            System.out.println("Start to process:" + fileItem.getName());
             CompanyPool poolWithLifeguard = readLifeGuard(fileItem.toPath());
             int maximumAmountOfTimeWhenGuardGetFired = getMaximumAmountOfTimeWhenGuardGetFired(poolWithLifeguard);
             String outputFilename = fileItem.getName().replace('.', '-') + ".out";
