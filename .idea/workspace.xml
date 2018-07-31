@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af6a9b88-b377-4b6d-87e7-665941a793eb" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cmu/data/assignment/model/CompanyPool.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cmu/data/assignment/App.java" afterPath="$PROJECT_DIR$/src/main/java/cmu/data/assignment/App.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cmu/data/assignment/model/Lifeguard.java" afterPath="$PROJECT_DIR$/src/main/java/cmu/data/assignment/model/Lifeguard.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,11 +29,11 @@
       <file leaf-file-name="App.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cmu/data/assignment/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-562">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="114">
+              <caret line="16" column="110" lean-forward="false" selection-start-line="16" selection-start-column="110" selection-end-line="16" selection-end-column="110" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1106#1117#0" expanded="true" />
+                <element signature="e#1062#1073#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -439,7 +437,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="13" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cmu/data/assignment/App.java</url>
+          <line>17</line>
+          <properties />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="14" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -525,11 +531,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cmu/data/assignment/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-562">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="114">
+          <caret line="16" column="110" lean-forward="false" selection-start-line="16" selection-start-column="110" selection-end-line="16" selection-end-column="110" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1106#1117#0" expanded="true" />
+            <element signature="e#1062#1073#0" expanded="true" />
           </folding>
         </state>
       </provider>

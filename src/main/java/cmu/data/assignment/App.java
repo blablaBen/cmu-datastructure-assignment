@@ -2,9 +2,8 @@ package cmu.data.assignment;
 import cmu.data.assignment.model.CompanyPool;
 import cmu.data.assignment.model.Lifeguard;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +12,16 @@ import java.util.stream.IntStream;
 public class App 
 {
     public static void main( String[] args ) throws IOException {
-        String inputFilePath = "./input/sample-input.txt";
-       CompanyPool poolWithLifeguard = readLifeGuard(inputFilePath);
+        Path inputFilePath = Paths.get("./input/sample-input.txt");
+        CompanyPool poolWithLifeguard = readLifeGuard(inputFilePath);
         int maximumAmountOfTimeWhenGuardGetFired = getMaximumAmountOfTimeWhenGuardGetFired(poolWithLifeguard);
     }
 
-    public static CompanyPool readLifeGuard(String inputFilePath) throws IOException {
+    public static CompanyPool readLifeGuard(Path inputFilePath) throws IOException {
         BufferedReader bufferedReader = null;
         FileReader fileReader = null;
 
-        fileReader = new FileReader(Paths.get(inputFilePath).toFile());
+        fileReader = new FileReader(inputFilePath.toFile());
         bufferedReader = new BufferedReader(fileReader);
 
         String sCurrentLine;
@@ -95,6 +94,12 @@ public class App
         }
 
         return maximumToTime;
+    }
+
+    public static void writeResultToOutput(String filePathAndName, int result) throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter writer = new PrintWriter(filePathAndName, "UTF-8");
+        writer.println(result);
+        writer.close();
     }
 
 }
