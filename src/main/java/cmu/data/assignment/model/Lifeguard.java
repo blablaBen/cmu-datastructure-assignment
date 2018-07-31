@@ -2,11 +2,11 @@ package cmu.data.assignment.model;
 
 public class Lifeguard {
     private int startTime;
-    private int endTime;
+    private int toTime;
 
-    public Lifeguard( String startTime, String endTime) {
+    public Lifeguard( String startTime, String toTime) {
         this.startTime = Integer.parseInt(startTime);
-        this.endTime = Integer.parseInt(endTime);
+        this.toTime = Integer.parseInt(toTime);
     }
 
     public int getStartTime() {
@@ -17,12 +17,12 @@ public class Lifeguard {
         this.startTime = startTime;
     }
 
-    public int getEndTime() {
-        return endTime;
+    public int getToTime() {
+        return toTime;
     }
 
-    public void setEndTime(int endTime) {
-        this.endTime = endTime;
+    public void setToTime(int toTime) {
+        this.toTime = toTime;
     }
 
 }
