@@ -53,4 +53,15 @@ public class App
         return result;
 
     }
+
+    public static int getMaximumToTime(List<Lifeguard> allLifeguards) {
+        int maximumToTime = 0;
+        for(Lifeguard item : allLifeguards) {
+            if(item.getToTime() > maximumToTime) {
+                maximumToTime = item.getToTime();
+            }
+        }
+
+        return maximumToTime;
+    }
 }
