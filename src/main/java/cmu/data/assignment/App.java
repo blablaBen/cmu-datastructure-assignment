@@ -12,9 +12,16 @@ import java.util.stream.IntStream;
 public class App 
 {
     public static void main( String[] args ) throws IOException {
-        Path inputFilePath = Paths.get("./input/sample-input.txt");
-        CompanyPool poolWithLifeguard = readLifeGuard(inputFilePath);
-        int maximumAmountOfTimeWhenGuardGetFired = getMaximumAmountOfTimeWhenGuardGetFired(poolWithLifeguard);
+
+        File folder = new File("./input");
+        File[] listOfFiles = folder.listFiles();
+
+        for(File fileItem: listOfFiles) {
+            CompanyPool poolWithLifeguard = readLifeGuard(fileItem.toPath());
+            int maximumAmountOfTimeWhenGuardGetFired = getMaximumAmountOfTimeWhenGuardGetFired(poolWithLifeguard);
+            String outputFilename = fileItem.getName().replace('.', '-') + ".out";
+            writeResultToOutput("./output/"+outputFilename, maximumAmountOfTimeWhenGuardGetFired);
+        }
     }
 
     public static CompanyPool readLifeGuard(Path inputFilePath) throws IOException {
