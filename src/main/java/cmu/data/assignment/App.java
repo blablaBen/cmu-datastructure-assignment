@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -22,7 +23,8 @@ public class App
         for(File fileItem: listOfFiles) {
             System.out.println("Start to process:" + fileItem.getName());
             CompanyPool poolWithLifeguard = readLifeGuard(fileItem.toPath());
-            getMaximumAmountOfTimeWhenGuardGetFired(poolWithLifeguard);
+            List<TimeSlotWithOccupier> timeSlotWithOccupiers = generateTimeSlotWithOcc(poolWithLifeguard);
+            int result = calculateTheMaximumTime(timeSlotWithOccupiers, poolWithLifeguard);
             String outputFilename = fileItem.getName().replace('.', '-') + ".out";
             writeResultToOutput("./output/"+outputFilename, 0);
         }
@@ -74,7 +76,7 @@ public class App
 
     }
 
-    public static void getMaximumAmountOfTimeWhenGuardGetFired(CompanyPool poolWithLifeguard) {
+    public static List<TimeSlotWithOccupier> generateTimeSlotWithOcc(CompanyPool poolWithLifeguard) {
         List<TimeSlotWithOccupier> timeSlotWithOccupiers = new ArrayList<>();
         List<String> currentOccupyers = new ArrayList<>();
         TimeSlot prevTime = null;
@@ -94,6 +96,22 @@ public class App
             }
             prevTime = timeSlot;
         }
+        return timeSlotWithOccupiers;
+    }
+
+    public static int calculateTheMaximumTime(List<TimeSlotWithOccupier> timeSlotWithOccupiers, CompanyPool companyPool) {
+        int allOccupiedTime = 0;
+        for(TimeSlotWithOccupier timeSlotWithOccupier : timeSlotWithOccupiers) {
+            allOccupiedTime += timeSlotWithOccupier.timeLength;
+            if(timeSlotWithOccupier.occupyers.length == 1) {
+                int occId = Integer.parseInt(timeSlotWithOccupier.occupyers[0]);
+                companyPool.lifeguardTimeOccupying[occId - 1] += timeSlotWithOccupier.timeLength;
+            }
+        }
+
+        int theLowestLifeguardTimeOccupying = Arrays.stream(companyPool.lifeguardTimeOccupying).min().getAsInt();
+        return allOccupiedTime - theLowestLifeguardTimeOccupying;
+
     }
 
 
