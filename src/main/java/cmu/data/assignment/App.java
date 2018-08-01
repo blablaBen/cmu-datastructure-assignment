@@ -80,11 +80,12 @@ public class App
         List<TimeSlotWithOccupier> timeSlotWithOccupiers = new ArrayList<>();
         List<String> currentOccupyers = new ArrayList<>();
         TimeSlot prevTime = null;
+        String[] defaultOcc = new String[]{"X", "Y"};
         for(TimeSlot timeSlot: poolWithLifeguard.allTimeSlot) {
             if(prevTime != null) {
                 int timeLength = timeSlot.pointTime - prevTime.pointTime;
                 if(timeLength != 0 && currentOccupyers.size() != 0) {
-                    String[] allOcc = currentOccupyers.toArray(new String[0]);
+                    String[] allOcc =  (currentOccupyers.size() > 1)?  defaultOcc: currentOccupyers.toArray(new String[0]);
                     timeSlotWithOccupiers.add(new TimeSlotWithOccupier(allOcc, timeLength, prevTime.pointTime, timeSlot.pointTime));
                 }
             }
