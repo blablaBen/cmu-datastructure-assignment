@@ -83,7 +83,7 @@ public class App
         for(TimeSlot timeSlot: poolWithLifeguard.allTimeSlot) {
             if(prevTime != null) {
                 int timeLength = timeSlot.pointTime - prevTime.pointTime;
-                if(timeLength != 0) {
+                if(timeLength != 0 && currentOccupyers.size() != 0) {
                     String[] allOcc = currentOccupyers.toArray(new String[0]);
                     timeSlotWithOccupiers.add(new TimeSlotWithOccupier(allOcc, timeLength, prevTime.pointTime, timeSlot.pointTime));
                 }
