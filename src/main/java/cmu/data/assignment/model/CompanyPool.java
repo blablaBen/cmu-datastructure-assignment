@@ -1,33 +1,19 @@
 package cmu.data.assignment.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CompanyPool {
+    public List<TimeSlot> allTimeSlot;
+    public int[] lifeguardTimeOccupying;
 
-    List<Lifeguard> currentLifeguard;
 
-    public CompanyPool(List<Lifeguard> currentLifeguard) {
-        this.currentLifeguard = currentLifeguard;
+    public CompanyPool( List<TimeSlot> allTimeSlot, int totalLifeguard) {
+        this.allTimeSlot = allTimeSlot;
+        this.lifeguardTimeOccupying = new int[totalLifeguard];
     }
 
-    public List<Lifeguard> getCurrentLifeguard() {
-        return currentLifeguard;
-    }
-
-    public void setCurrentLifeguard(List<Lifeguard> currentLifeguard) {
-        this.currentLifeguard = currentLifeguard;
-    }
-
-    public List<Lifeguard> getFiredLifeguard(int getFiredIndex) {
-        List<Lifeguard> result = new ArrayList<Lifeguard>();
-        for(int i = 0; i<this.currentLifeguard.size(); i++) {
-            if(i != getFiredIndex) {
-                result.add(this.currentLifeguard.get(i));
-            }
-        }
-        return result;
-    }
 
 
 }

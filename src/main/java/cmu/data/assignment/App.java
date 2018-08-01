@@ -1,10 +1,12 @@
 package cmu.data.assignment;
 import cmu.data.assignment.model.CompanyPool;
 import cmu.data.assignment.model.Lifeguard;
+import cmu.data.assignment.model.TimeSlot;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -37,12 +39,17 @@ public class App
         int totalLifeGuards = Integer.parseInt(bufferedReader.readLine());
         List<Lifeguard> result = new ArrayList<Lifeguard>();
 
+        List<TimeSlot> allTimeSlot = new ArrayList<>();
         BufferedReader finalBufferedReader = bufferedReader;
         IntStream.rangeClosed(1, totalLifeGuards).forEach(
-                nbr -> {
+                index -> {
                     try {
                         String[] lifeGuardInput = finalBufferedReader.readLine().split(" ");
-                        result.add(new Lifeguard(lifeGuardInput[0], lifeGuardInput[1]));
+                        Lifeguard guard = new Lifeguard(index, lifeGuardInput[0], lifeGuardInput[1]);
+                        TimeSlot timeSlotStart = new TimeSlot(guard.startTime, guard.name, true);
+                        TimeSlot timeSlotEnd = new TimeSlot(guard.toTime, guard.name, false);
+                        allTimeSlot.add(timeSlotStart);
+                        allTimeSlot.add(timeSlotEnd);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -58,36 +65,11 @@ public class App
             ex.printStackTrace();
         }
 
-        return new CompanyPool(result);
+        return new CompanyPool(allTimeSlot, totalLifeGuards);
 
     }
 
     public static int getMaximumAmountOfTimeWhenGuardGetFired(CompanyPool poolWithLifeguard) {
-        int maximumTime = getMaximumAvailToTime(poolWithLifeguard.getCurrentLifeguard());
-
-        int maximumAmountOfTimeWhenGuardGetFired = 0;
-        for(int i=0 ; i< poolWithLifeguard.getCurrentLifeguard().size(); i++) {
-            boolean[] timeSlots = new boolean[maximumTime];
-            List<Lifeguard> allLifeguardsWhenOneGetFired = poolWithLifeguard.getFiredLifeguard(i);
-            for(Lifeguard lifeguard : allLifeguardsWhenOneGetFired) {
-                IntStream.rangeClosed(lifeguard.getStartTime(), lifeguard.getRealEndTime()).forEach(
-                        index -> {
-                           timeSlots[index] = true;
-                        }
-                );
-            }
-
-            int totoalAmountOfTimeslots = 0;
-            for(boolean hasGuard: timeSlots) {
-                if(hasGuard) {
-                    totoalAmountOfTimeslots ++;
-                }
-            }
-
-            maximumAmountOfTimeWhenGuardGetFired = totoalAmountOfTimeslots > maximumAmountOfTimeWhenGuardGetFired ? totoalAmountOfTimeslots : maximumAmountOfTimeWhenGuardGetFired;
-        }
-
-        return maximumAmountOfTimeWhenGuardGetFired;
     }
 
 
