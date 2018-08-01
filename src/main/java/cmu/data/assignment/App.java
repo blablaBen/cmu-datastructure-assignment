@@ -21,9 +21,8 @@ public class App
         for(File fileItem: listOfFiles) {
             System.out.println("Start to process:" + fileItem.getName());
             CompanyPool poolWithLifeguard = readLifeGuard(fileItem.toPath());
-            int maximumAmountOfTimeWhenGuardGetFired = getMaximumAmountOfTimeWhenGuardGetFired(poolWithLifeguard);
             String outputFilename = fileItem.getName().replace('.', '-') + ".out";
-            writeResultToOutput("./output/"+outputFilename, maximumAmountOfTimeWhenGuardGetFired);
+            writeResultToOutput("./output/"+outputFilename, 0);
         }
     }
 
@@ -56,6 +55,7 @@ public class App
                 }
         );
 
+
         try {
             if (bufferedReader != null)
                 bufferedReader.close();
@@ -65,26 +65,19 @@ public class App
             ex.printStackTrace();
         }
 
+        allTimeSlot.sort((a1, a2) -> {
+            return a1.pointTime - a2.pointTime;
+        });
         return new CompanyPool(allTimeSlot, totalLifeGuards);
 
     }
 
-    public static int getMaximumAmountOfTimeWhenGuardGetFired(CompanyPool poolWithLifeguard) {
+    public static void getMaximumAmountOfTimeWhenGuardGetFired(CompanyPool poolWithLifeguard) {
+
     }
 
 
 
-
-    private static int getMaximumAvailToTime(List<Lifeguard> allLifeguards) {
-        int maximumToTime = 0;
-        for(Lifeguard item : allLifeguards) {
-            if(item.getToTime() > maximumToTime) {
-                maximumToTime = item.getToTime();
-            }
-        }
-
-        return maximumToTime;
-    }
 
     public static void writeResultToOutput(String filePathAndName, int result) throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter writer = new PrintWriter(filePathAndName, "UTF-8");
