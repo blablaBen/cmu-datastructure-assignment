@@ -26,7 +26,7 @@ public class App
             List<TimeSlotWithOccupier> timeSlotWithOccupiers = generateTimeSlotWithOcc(poolWithLifeguard);
             int result = calculateTheMaximumTime(timeSlotWithOccupiers, poolWithLifeguard);
             String outputFilename = fileItem.getName().replace('.', '-') + ".out";
-            writeResultToOutput("./output/"+outputFilename, 0);
+            writeResultToOutput("./output/"+outputFilename, result);
         }
     }
 
