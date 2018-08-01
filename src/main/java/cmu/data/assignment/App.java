@@ -2,6 +2,7 @@ package cmu.data.assignment;
 import cmu.data.assignment.model.CompanyPool;
 import cmu.data.assignment.model.Lifeguard;
 import cmu.data.assignment.model.TimeSlot;
+import cmu.data.assignment.model.TimeSlotWithOccupier;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -21,6 +22,7 @@ public class App
         for(File fileItem: listOfFiles) {
             System.out.println("Start to process:" + fileItem.getName());
             CompanyPool poolWithLifeguard = readLifeGuard(fileItem.toPath());
+            getMaximumAmountOfTimeWhenGuardGetFired(poolWithLifeguard);
             String outputFilename = fileItem.getName().replace('.', '-') + ".out";
             writeResultToOutput("./output/"+outputFilename, 0);
         }
@@ -73,7 +75,25 @@ public class App
     }
 
     public static void getMaximumAmountOfTimeWhenGuardGetFired(CompanyPool poolWithLifeguard) {
+        List<TimeSlotWithOccupier> timeSlotWithOccupiers = new ArrayList<>();
+        List<String> currentOccupyers = new ArrayList<>();
+        TimeSlot prevTime = null;
+        for(TimeSlot timeSlot: poolWithLifeguard.allTimeSlot) {
+            if(prevTime != null) {
+                int timeLength = timeSlot.pointTime - prevTime.pointTime;
+                if(timeLength != 0) {
+                    String[] allOcc = currentOccupyers.toArray(new String[0]);
+                    timeSlotWithOccupiers.add(new TimeSlotWithOccupier(allOcc, timeLength, prevTime.pointTime, timeSlot.pointTime));
+                }
+            }
 
+            if(timeSlot.isStartTime) {
+                currentOccupyers.add(timeSlot.lifeguardName + "");
+            } else {
+                currentOccupyers.remove(timeSlot.lifeguardName+"");
+            }
+            prevTime = timeSlot;
+        }
     }
 
 
